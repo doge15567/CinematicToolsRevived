@@ -22,12 +22,12 @@ internal static class TheHandler
         if (_cineCamera) Object.Destroy(_cineCamera.gameObject);
         _cineCamera = null;
         
-        var transform = Player.Head.transform;
+        var head = Player.Head.transform;
         var cameraObj = new GameObject("CineTools_Camera");
         if (!cameraObj) return;
         cameraObj.SetActive(false);
-        cameraObj.transform.position = transform.transform.position;
-        cameraObj.transform.rotation = transform.transform.rotation;
+        cameraObj.transform.position = head.transform.position;
+        cameraObj.transform.rotation = head.transform.rotation;
         
         var camera = cameraObj.AddComponent<Camera>();
         _cineCamera = camera;
@@ -114,8 +114,8 @@ internal static class TheHandler
     {
         var avatarObj = Player.Avatar.gameObject;
         var clone = Object.Instantiate(avatarObj);
-        clone.transform.position = Player.RemapRig.transform.position;
-        clone.transform.rotation = Player.RemapRig.transform.rotation;
+        clone.transform.position = avatarObj.transform.position;
+        clone.transform.rotation = avatarObj.transform.rotation;
         _lastClonedAvatarRef = clone;
         ClonedAvatars.Add(clone);
     }
