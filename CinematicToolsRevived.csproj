@@ -34,39 +34,43 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Remove="Links\**"/>
-        <Compile Remove="Staging\**"/>
+        <Compile Remove="Links\**" />
+        <Compile Remove="Staging\**" />
     </ItemGroup>
 
     <ItemGroup>
-        <EmbeddedResource Remove="Links\**"/>
-        <EmbeddedResource Remove="Staging\**"/>
+        <EmbeddedResource Remove="Links\**" />
+        <EmbeddedResource Remove="Staging\**" />
     </ItemGroup>
 
     <ItemGroup>
-        <None Remove="Links\**"/>
-        <None Remove="Staging\**"/>
-        <None Remove="Refs\**"/>
-        <None Remove=".gitignore"/>
-        <None Remove="README.md"/>
-        <None Remove="setup.bat"/>
+        <None Remove="Links\**" />
+        <None Remove="Staging\**" />
+        <None Remove="Refs\**" />
+        <None Remove=".gitignore" />
+        <None Remove="README.md" />
+        <None Remove="setup.bat" />
     </ItemGroup>
 
     <ItemGroup>
         <Reference Include="BoneLib">
-            <HintPath>Links\Mods\BoneLib.dll</HintPath>
+            <HintPath>$(BONELAB_DIR)\Mods\BoneLib.dll</HintPath>
         </Reference>
         <Reference Include="0Harmony">
-            <HintPath>Links\Game\MelonLoader\net6\0Harmony.dll</HintPath>
+            <HintPath>$(BONELAB_DIR)\MelonLoader\net6\0Harmony.dll</HintPath>
         </Reference>
 
-        <PackageReference Include="LavaGang.MelonLoader" Version="0.6.4"/>
-        <PackageReference Include="Bonelab.GameLibs.Steam" Version="5.0.0"/>
-        <PackageReference Include="Il2CppInterop.Runtime" Version="1.4.5"/>
+        <PackageReference Include="LavaGang.MelonLoader" Version="0.6.4" />
+        <PackageReference Include="Bonelab.GameLibs.Steam" Version="5.0.0" />
+        <PackageReference Include="Il2CppInterop.Runtime" Version="1.4.5" />
+        <PackageReference Include="Microsoft.Unity.Analyzers" Version="1.22.0">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
     </ItemGroup>
 
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-        <Exec Command="COPY &quot;$(TargetPath)&quot; &quot;$(SolutionDir)Links\Mods&quot;&#xA;COPY &quot;$(TargetPath)&quot; &quot;$(SolutionDir)Staging\Mods&quot;"/>
+        <Exec Command="COPY &quot;$(TargetPath)&quot; &quot;$(BONELAB_DIR)\Mods&quot;&#xD;&#xA;COPY /y &quot;$(TargetDir)$(TargetName).pdb&quot; &quot;$(BONELAB_DIR)\Mods&quot; " />
     </Target>
 
 </Project>

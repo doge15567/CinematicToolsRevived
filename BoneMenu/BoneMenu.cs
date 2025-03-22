@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using Il2Cpp;
-using Il2CppSLZ.Marrow;
-using UnityEngine.Rendering.Universal;
+﻿using Il2CppSLZ.Marrow;
 
 namespace CinematicToolsRevived.Menu;
 
@@ -34,10 +31,14 @@ internal static class BoneMenu
         cameraCat.CreateFloat("FOV", Color.white, 90, 1, 0.0f, 180f, TheHandler.UpdateCamera);
         cameraCat.CreateFunction("Spawn Camera", Color.green, TheHandler.SpawnCamera);
         cameraCat.CreateFunction("Destroy Camera", Color.red, TheHandler.DestroyCamera);
-        
+         
         cloneCat.CreateFloat("Capture Delay", Color.white, 1f, 1f, 0.0f, 999f, (float value) =>
         {
             TheHandler.AvatarCloneDelay = value;
+        });
+        cloneCat.CreateBool("Freeze Held Objects On Clone", Color.white, TheHandler.makeHeldObjectsKinematic, (bool value) =>
+        {
+            TheHandler.makeHeldObjectsKinematic = value;
         });
         cloneCat.CreateFunction("Dupe Avatar", Color.green, TheHandler.StartCloneAvatar);
         cloneCat.CreateFunction("Delete Last Avatar", Color.yellow, TheHandler.DestroyLastClone);
